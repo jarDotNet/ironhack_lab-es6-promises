@@ -62,6 +62,23 @@ getInstruction(
 );
 
 // Iteration 2 - using promises
+
+function makeSteak(step = 0)  {
+	return obtainInstruction('steak', step)
+    .then(result => {
+      document.querySelector("#steak").innerHTML += `<li>${result}</li>`;
+      return makeSteak(step + 1);
+    })
+    .catch((error) => console.log(error));
+}
+
+makeSteak()
+	.then(() => {
+		document.querySelector("#steak").innerHTML += '<li>Stake is ready!</li>';
+		document.querySelector("#steakImg").removeAttribute("hidden");
+  });
+  
+/*
 obtainInstruction('steak', 0)
   .then( (step0) => {
     document.querySelector("#steak").innerHTML += `<li>${step0}</li>`;
@@ -97,6 +114,7 @@ obtainInstruction('steak', 0)
     document.querySelector("#steakImg").removeAttribute("hidden");
   })
   .catch((error) => console.log(error));
+*/
 
 // Iteration 3 using async/await
 async function makeBroccoli() {
